@@ -7,12 +7,13 @@ import { Slides, Slide } from './styled';
 
 const Gallery = ({ images, defaultSlideIndex }) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(defaultSlideIndex);
+  const imagesIndexLength = images.length === 0 ? 0 : images.length - 1;
 
   const handleBtnClick = (newSlideIndex) => setActiveSlideIndex(newSlideIndex);
 
   return (
     <Fragment>
-      <SnapperButton isPrev={true}/>
+      <SnapperButton isPrev={true} activeSlideIndex={activeSlideIndex} imagesIndexLength={imagesIndexLength} handleBtnClick={handleBtnClick} />
 
       <Slides>
         {images.map((slide, key) => {
@@ -27,7 +28,7 @@ const Gallery = ({ images, defaultSlideIndex }) => {
         })}
       </Slides>
 
-      <SnapperButton isPrev={false} />
+      <SnapperButton isPrev={false} activeSlideIndex={activeSlideIndex} imagesIndexLength={imagesIndexLength} handleBtnClick={handleBtnClick} />
       <CarouselNav images={images} activeSlideIndex={activeSlideIndex} handleBtnClick={handleBtnClick} />
     </Fragment>
   );
