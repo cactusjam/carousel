@@ -3,11 +3,12 @@ import propTypes from 'prop-types';
 
 import SnapperButton from "../snapper-button/snapper-button";
 import CarouselNav from "../carousel-nav/carousel-nav";
-import { Slides, Slide } from './styled';
+import { Slides, Slide, Img } from './styled';
 
 const Gallery = ({ images, defaultSlideIndex }) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(defaultSlideIndex);
   const imagesIndexLength = images.length === 0 ? 0 : images.length - 1;
+  // const IMG_WIDTH = 800;
 
   const handleBtnClick = (newSlideIndex) => setActiveSlideIndex(newSlideIndex);
 
@@ -15,18 +16,24 @@ const Gallery = ({ images, defaultSlideIndex }) => {
     <Fragment>
       <SnapperButton isPrev={true} activeSlideIndex={activeSlideIndex} imagesIndexLength={imagesIndexLength} handleBtnClick={handleBtnClick} />
 
-      <Slides>
-        {images.map((slide, key) => {
-          const { alt, src, width } = slide;
-          const isActive = key === activeSlideIndex;
+        <Slides>
+          {images.map((slide, index) => {
+            const { alt, src} = slide;
+            const isActive = index === activeSlideIndex;
+            // const leftIndent = IMG_WIDTH * (index - activeSlideIndex);
+            const leftIndent = index - activeSlideIndex;
 
-          return (
-            <Slide key={key} isActive={isActive}>
-              <img src={src} alt={alt} width={width} />
-            </Slide>
-          )
-        })}
-      </Slides>
+            return (
+              <Slide
+                key={index}
+                isActive={isActive}
+                leftIndent={leftIndent}
+              >
+                <Img src={src} alt={alt} />
+              </Slide>
+            )
+          })}
+        </Slides>
 
       <SnapperButton isPrev={false} activeSlideIndex={activeSlideIndex} imagesIndexLength={imagesIndexLength} handleBtnClick={handleBtnClick} />
       <CarouselNav images={images} activeSlideIndex={activeSlideIndex} handleBtnClick={handleBtnClick} />
