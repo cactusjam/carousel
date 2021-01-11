@@ -1,54 +1,82 @@
-import React, { Fragment, useState } from "react";
+
+import React, {useState} from "react";
 import propTypes from 'prop-types';
 
-import SnapperButton from "../snapper-button/snapper-button";
-import CarouselNav from "../carousel-nav/carousel-nav";
 import { Slides, Slide, Img } from './styled';
 
-const Gallery = ({ images, defaultSlideIndex }) => {
-  const [activeSlideIndex, setActiveSlideIndex] = useState(defaultSlideIndex);
+const Gallery = ({ images, activeSlideIndex, setActiveSlideIndex }) => {
+  const [firstPosition, setFirstPosition] = useState(0);
+  const [lastPosition, setLastPosition] = useState(0);
+
   const imagesIndexLength = images.length === 0 ? 0 : images.length - 1;
-  // const IMG_WIDTH = 800;
+  let positionDelta = lastPosition - firstPosition;
 
-  const handleBtnClick = (newSlideIndex) => setActiveSlideIndex(newSlideIndex);
+  const containerShift = lastPosition != 0 && images.length > 1
+    ? Math.round(positionDelta)
+    : 0;
 
+  const handleSlideTouchStart = evt => {
+    if (images.length > 1) {
+      setFirstPosition(evt.nativeEvent.touches[0].pageX);
+    }
+  };
+
+  const handleSlideTouchMove = evt => {
+    if (images.length > 1) {
+      setLastPosition(evt.nativeEvent.touches[0].pageX);
+    }
+  };
+
+  const handleSlideTouchEnd = () => {
+    if (lastPosition > 0) {
+      if (positionDelta >= 40) {
+        const newIndex = activeSlideIndex === 0 ? imagesIndexLength : activeSlideIndex - 1;
+        setActiveSlideIndex(newIndex)
+      }
+
+      if (positionDelta <= -40) {
+        const newIndex = activeSlideIndex < imagesIndexLength ? activeSlideIndex + 1 : 0;
+        setActiveSlideIndex(newIndex)
+      }
+    }
+
+    setFirstPosition(0);
+    setLastPosition(0);
+  };
   return (
-    <Fragment>
-      <SnapperButton isPrev={true} activeSlideIndex={activeSlideIndex} imagesIndexLength={imagesIndexLength} handleBtnClick={handleBtnClick} />
+    <Slides containerShift={containerShift}>
+      {images.map((slide, index) => {
+        const { alt, src } = slide;
+        const isActive = index === activeSlideIndex;
+        const leftIndent = 100 * (index - activeSlideIndex);
 
-        <Slides>
-          {images.map((slide, index) => {
-            const { alt, src} = slide;
-            const isActive = index === activeSlideIndex;
-            // const leftIndent = IMG_WIDTH * (index - activeSlideIndex);
-            const leftIndent = index - activeSlideIndex;
-
-            return (
-              <Slide
-                key={index}
-                isActive={isActive}
-                leftIndent={leftIndent}
-              >
-                <Img src={src} alt={alt} />
-              </Slide>
-            )
-          })}
-        </Slides>
-
-      <SnapperButton isPrev={false} activeSlideIndex={activeSlideIndex} imagesIndexLength={imagesIndexLength} handleBtnClick={handleBtnClick} />
-      <CarouselNav images={images} activeSlideIndex={activeSlideIndex} handleBtnClick={handleBtnClick} />
-    </Fragment>
+        return (
+          <Slide
+            key={index}
+            isActive={isActive}
+            leftIndent={leftIndent}
+            onTouchStart={handleSlideTouchStart}
+            onTouchMove={handleSlideTouchMove}
+            onTouchEnd={handleSlideTouchEnd}
+            positionDelta={positionDelta}
+          >
+            <Img src={src} alt={alt} />
+          </Slide>
+        )
+      })}
+    </Slides>
   );
 }
 
 Gallery.defaultProps = {
   images: [],
-  defaultSlideIndex: 0,
+  activeSlideIndex: 0,
 }
 
 Gallery.propTypes = {
   images: propTypes.array.isRequired,
-  defaultSlideIndex: propTypes.number.isRequired,
+  activeSlideIndex: propTypes.number.isRequired,
+  setActiveSlideIndex: propTypes.func.isRequired,
 }
 
 export default Gallery;

@@ -3,7 +3,12 @@ import propTypes from 'prop-types';
 import { CarouselPrev, CarouselNext, CarouselSnapper } from './styled';
 
 const SnapperButton = (props) => {
-  const {isPrev, activeSlideIndex, imagesIndexLength, handleBtnClick} = props;
+  const {
+    activeSlideIndex,
+    imagesIndexLength,
+    isPrev,
+    handleBtnClick }
+    = props;
 
   const goPrevImageIndex = () => {
     const newIndex = activeSlideIndex === 0 ? imagesIndexLength : activeSlideIndex - 1;
@@ -17,7 +22,7 @@ const SnapperButton = (props) => {
 
   return (
     <CarouselSnapper isPrev={isPrev}>
-      {isPrev? <CarouselPrev onClick={goPrevImageIndex}/> : <CarouselNext onClick={goNextImageIndex}/>}
+      {isPrev ? <CarouselPrev onClick={goPrevImageIndex} /> : <CarouselNext onClick={goNextImageIndex} />}
     </CarouselSnapper>
   );
 }

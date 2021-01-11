@@ -15,14 +15,14 @@ body {
 
 @media (min-width: 320px) {
   #carousel {
-    height: 206px;
+    height: 216px;
     width: 287px;
   }
 }
 
 @media (max-width: 320px) {
   #carousel {
-    height: 206px;
+    height: 216px;
     width: 287px;
   }
 }

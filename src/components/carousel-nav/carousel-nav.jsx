@@ -4,21 +4,21 @@ import propTypes from 'prop-types';
 import { CarouselControl, CarouselControlBtn } from './styled';
 
 const CarouselNav = (props) => {
-  const {images, activeSlideIndex, handleBtnClick} = props;
+  const { images, activeSlideIndex, handleBtnClick } = props;
 
   return (
     <CarouselControl>
       {images.map((_slide, i) => {
-          const isActive = i === activeSlideIndex;
+        const isActive = i === activeSlideIndex;
 
-          return (
-            <CarouselControlBtn
-              key={i}
-              isActive={isActive}
-              onClick={() => handleBtnClick(i)}
-            />
-          )
-        })}
+        return (
+          <CarouselControlBtn
+            key={i}
+            isActive={isActive}
+            onClick={() => handleBtnClick(i)}
+          />
+        )
+      })}
     </CarouselControl>
   );
 }
