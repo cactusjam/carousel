@@ -37,10 +37,6 @@ export const Img = styled.img`
     height: 206px;
   }
 
-  @media (max-width: 320px) {
-    height: 206px;
-  }
-
   @media (min-width: 768px) {
     height: 300px;
   }

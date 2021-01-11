@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const CarouselControl = styled.div `
-  position: absolute;
-  bottom: 10px;
   left: 0;
   width: 100%;
   z-index: 3;
@@ -13,11 +11,6 @@ export const CarouselControl = styled.div `
 @media (min-width: 320px) {
   position: relative;
   bottom: 6px;
-}
-
-@media (max-width: 320px) {
-  position: absolute;
-  bottom: 0;
 }
 
 @media (min-width: 768px) {

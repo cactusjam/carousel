@@ -3,24 +3,13 @@ body {
 }
 
 #carousel {
-  position: fixed;
   margin: auto;
   min-height: 191px;
   overflow: hidden;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  position: relative;
 }
 
 @media (min-width: 320px) {
-  #carousel {
-    height: 216px;
-    width: 287px;
-  }
-}
-
-@media (max-width: 320px) {
   #carousel {
     height: 216px;
     width: 287px;
