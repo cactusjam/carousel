@@ -26,7 +26,7 @@ export const CarouselPrev = styled.a`
     top: 40%;
   }
 
-  @media (max-width: 1199px) {
+  @media (min-width: 320px) and (max-width: 1199px) {
     width: 30px;
     height: 30px;
   }

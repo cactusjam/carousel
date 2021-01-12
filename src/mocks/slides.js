@@ -28,10 +28,5 @@ export default [
     id: 6,
     alt: `landscape photography of brown mountain`,
     src: `/img/6.jpg`,
-  },
-  {
-    id: 7,
-    alt: `landscape photography of brown mountain`,
-    src: `/img/7.jpg`,
   }
 ];
