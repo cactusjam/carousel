@@ -49,9 +49,9 @@ export const CarouselSnapper = styled.div`
   transform: translateY(-50%);
   padding: 10px;
   z-index: 3;
-  display: none;
+  display: block;
 
-  @media (min-width: 768px) {
-    display: block;
+  @media (max-width: 1199px) {
+    display: none;
   }
 `;
