@@ -4,6 +4,9 @@ env:
   browser: true
   commonjs: true
   jest: true
+  rules: {
+      quotes: ['error', 'single']
+    }
 
 parserOptions:
   ecmaFeatures:

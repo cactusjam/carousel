@@ -1,5 +1,5 @@
 
-import React, {useState} from "react";
+import React, {useState} from 'react';
 import propTypes from 'prop-types';
 
 import { Slides, Slide, Img } from './styled';

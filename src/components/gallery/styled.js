@@ -15,7 +15,7 @@ export const Slides = styled.ul`
       will-change: transform;
       transform: translateX(${props.containerShift}px);
     `
-    : `transition: transform 0.5s ease-in 0s;`
+    : 'transition: transform 0.5s ease-in 0s;'
   }
 `;
 

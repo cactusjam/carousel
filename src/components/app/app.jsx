@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from 'react';
 import propTypes from 'prop-types';
-import SnapperButton from "../snapper-button/snapper-button";
-import CarouselNav from "../carousel-nav/carousel-nav";
+import SnapperButton from '../snapper-button/snapper-button';
+import CarouselNav from '../carousel-nav/carousel-nav';
 import Gallery from '../gallery/gallery';
 
 const App = ({ images }) => {
