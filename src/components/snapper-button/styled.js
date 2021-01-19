@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CarouselPrev = styled.a`
+export const CarouselPrev = styled.button`
   background-color: #AAA8A8;
   border-radius: 50%;
   cursor: pointer;
@@ -8,6 +8,8 @@ export const CarouselPrev = styled.a`
   width: 40px;
   height: 40px;
   left: 2%;
+  border: none;
+  outline: none;
 
   &:before,
   &:after {

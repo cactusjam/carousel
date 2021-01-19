@@ -7,19 +7,18 @@ export const CarouselControl = styled.div `
   padding: 0;
   display: flex;
   justify-content: center;
+  bottom: 10px;
 
 @media (min-width: 320px) {
   position: relative;
-  bottom: 6px;
 }
 
 @media (min-width: 768px) {
   position: absolute;
-  bottom: 10px;
 }
 `;
 
-export const CarouselControlBtn = styled.a `
+export const CarouselControlBtn = styled.button `
   background-color: ${props => props.isActive ? '#949494' : '#FFFFFF'};
   border: none;
   border-radius: 50%;
@@ -31,6 +30,10 @@ export const CarouselControlBtn = styled.a `
 &:focus {
   outline: none;
 }
+
+@media (min-width: 320px) {
+  padding: 5px;
+ }
 
 @media (max-width: 768px) {
   background-color: ${props => props.isActive ? '#87BAE5' : '#949494'};

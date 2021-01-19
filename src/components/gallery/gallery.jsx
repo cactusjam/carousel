@@ -9,7 +9,7 @@ const Gallery = ({ images, activeSlideIndex, setActiveSlideIndex }) => {
   const [lastPosition, setLastPosition] = useState(0);
 
   const imagesIndexLength = images.length === 0 ? 0 : images.length - 1;
-  let positionDelta = lastPosition - firstPosition;
+  const positionDelta = lastPosition - firstPosition;
 
   const containerShift = lastPosition != 0 && images.length > 1
     ? Math.round(positionDelta)

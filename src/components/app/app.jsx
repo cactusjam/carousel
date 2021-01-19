@@ -13,7 +13,7 @@ const App = ({ images }) => {
   return (
     <Fragment>
       <SnapperButton
-        isPrev={true}
+        isPrev
         activeSlideIndex={activeSlideIndex}
         imagesIndexLength={imagesIndexLength}
         handleBtnClick={handleBtnClick} />
@@ -27,9 +27,9 @@ const App = ({ images }) => {
         handleBtnClick={handleBtnClick} />
 
       <CarouselNav
-        images={images}
         activeSlideIndex={activeSlideIndex}
-        handleBtnClick={handleBtnClick} />
+        handleBtnClick={handleBtnClick}
+        imagesLength={images.length} />
     </Fragment>
   );
 };
