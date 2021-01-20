@@ -83,10 +83,7 @@ Gallery.defaultProps = {
 }
 
 Gallery.propTypes = {
-  children: propTypes.oneOfType([
-    propTypes.arrayOf(propTypes.node),
-    propTypes.node
-  ]).isRequired,
+  children: propTypes.arrayOf(propTypes.node).isRequired,
   images: propTypes.array.isRequired,
   activeSlideIndex: propTypes.number.isRequired,
   setActiveSlideIndex: propTypes.func.isRequired,
