@@ -1,8 +1,8 @@
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 
-import { Slides, Slide} from './styled';
+import { Slides, Slide } from './styled';
 
 const Gallery = (props) => {
   const {
