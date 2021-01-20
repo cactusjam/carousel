@@ -2,9 +2,16 @@
 import React, {useState} from 'react';
 import propTypes from 'prop-types';
 
-import { Slides, Slide, Img } from './styled';
+import { Slides, Slide} from './styled';
 
-const Gallery = ({ images, activeSlideIndex, setActiveSlideIndex }) => {
+const Gallery = (props) => {
+  const {
+    children,
+    images,
+    activeSlideIndex,
+    setActiveSlideIndex }
+    = props;
+
   const [firstPosition, setFirstPosition] = useState(0);
   const [lastPosition, setLastPosition] = useState(0);
 
@@ -43,10 +50,11 @@ const Gallery = ({ images, activeSlideIndex, setActiveSlideIndex }) => {
     setFirstPosition(0);
     setLastPosition(0);
   };
+
   return (
     <Slides containerShift={containerShift}>
-      {images.map((slide, index) => {
-        const { alt, src } = slide;
+
+      {React.Children.map(children, (child, index) => {
         const isActive = index === activeSlideIndex;
         const leftIndent = 100 * (index - activeSlideIndex);
 
@@ -60,10 +68,11 @@ const Gallery = ({ images, activeSlideIndex, setActiveSlideIndex }) => {
             onTouchEnd={handleSlideTouchEnd}
             positionDelta={positionDelta}
           >
-            <Img src={src} alt={alt} />
+            {child}
           </Slide>
         )
       })}
+
     </Slides>
   );
 }
@@ -74,6 +83,10 @@ Gallery.defaultProps = {
 }
 
 Gallery.propTypes = {
+  children: propTypes.oneOfType([
+    propTypes.arrayOf(propTypes.node),
+    propTypes.node
+  ]).isRequired,
   images: propTypes.array.isRequired,
   activeSlideIndex: propTypes.number.isRequired,
   setActiveSlideIndex: propTypes.func.isRequired,
