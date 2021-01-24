@@ -10,6 +10,7 @@ const SliderWrapper = ({ images }) => {
   const imagesIndexLength = images.length === 0 ? 0 : images.length - 1;
 
   const handleBtnClick = (newSlideIndex) => setActiveSlideIndex(newSlideIndex);
+  const allImages = [images[images.length - 1], ...images, images[0]];
 
   return (
     <Fragment>
@@ -20,7 +21,7 @@ const SliderWrapper = ({ images }) => {
         handleBtnClick={handleBtnClick} />
 
       <Gallery images={images} activeSlideIndex={activeSlideIndex} setActiveSlideIndex={setActiveSlideIndex}>
-        {images.map(({ alt, id, src }) => (
+        {allImages.map(({ alt, id, src }) => (
           <Img src={src} alt={alt} key={id} />
         ))}
       </Gallery>
