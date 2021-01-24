@@ -3,13 +3,7 @@ import propTypes from 'prop-types';
 
 import { CarouselControl, CarouselControlBtn } from './styled';
 
-const CarouselNav = (props) => {
-  const {
-    activeSlideIndex,
-    imagesLength,
-    handleBtnClick }
-     = props;
-
+const CarouselNav = ({ activeSlideIndex, imagesLength, handleBtnClick }) => {
   const indexes = [...Array(imagesLength).keys()];
 
   return (

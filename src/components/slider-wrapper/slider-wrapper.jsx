@@ -10,7 +10,7 @@ const SliderWrapper = ({ images }) => {
   const imagesIndexLength = images.length === 0 ? 0 : images.length - 1;
 
   const handleBtnClick = (newSlideIndex) => setActiveSlideIndex(newSlideIndex);
-  const allImages = [images[images.length - 1], ...images, images[0]];
+  const orderedImages = [images[images.length - 1], ...images, images[0]];
 
   return (
     <Fragment>
@@ -18,10 +18,15 @@ const SliderWrapper = ({ images }) => {
         isPrev
         activeSlideIndex={activeSlideIndex}
         imagesIndexLength={imagesIndexLength}
-        handleBtnClick={handleBtnClick} />
+        handleBtnClick={handleBtnClick}
+      />
 
-      <Gallery images={images} activeSlideIndex={activeSlideIndex} setActiveSlideIndex={setActiveSlideIndex}>
-        {allImages.map(({ alt, id, src }) => (
+      <Gallery
+        imagesIndexLength={imagesIndexLength}
+        activeSlideIndex={activeSlideIndex}
+        setActiveSlideIndex={setActiveSlideIndex}
+      >
+        {orderedImages.map(({ alt, id, src }) => (
           <Img src={src} alt={alt} key={id} />
         ))}
       </Gallery>
@@ -30,12 +35,14 @@ const SliderWrapper = ({ images }) => {
         isPrev={false}
         activeSlideIndex={activeSlideIndex}
         imagesIndexLength={imagesIndexLength}
-        handleBtnClick={handleBtnClick} />
+        handleBtnClick={handleBtnClick}
+      />
 
       <CarouselNav
         activeSlideIndex={activeSlideIndex}
         handleBtnClick={handleBtnClick}
-        imagesLength={images.length} />
+        imagesLength={images.length}
+      />
     </Fragment>
   );
 };

@@ -9,13 +9,15 @@ export const CarouselControl = styled.div `
   justify-content: center;
   bottom: 10px;
 
-@media (min-width: 320px) {
-  position: relative;
-}
+  @media (min-width: 320px) {
+    position: relative;
+    bottom: 0;
+  }
 
-@media (min-width: 768px) {
-  position: absolute;
-}
+  @media (min-width: 768px) {
+    position: absolute;
+    bottom: 10px;
+  }
 `;
 
 export const CarouselControlBtn = styled.button `
@@ -27,18 +29,18 @@ export const CarouselControlBtn = styled.button `
   width: 20px;
   height: 20px;
 
-&:focus {
-  outline: none;
-}
+  &:focus {
+    outline: none;
+  }
 
-@media (min-width: 320px) {
-  padding: 5px;
- }
+  @media (min-width: 320px) {
+    padding: 5px;
+  }
 
-@media (max-width: 768px) {
-  background-color: ${props => props.isActive ? '#87BAE5' : '#949494'};
-  width: 5px;
-  height: 5px;
-  margin: 0 2px;
-}
+  @media (max-width: 768px) {
+    background-color: ${props => props.isActive ? '#87BAE5' : '#949494'};
+    width: 5px;
+    height: 5px;
+    margin: 0 2px;
+  }
 `;
