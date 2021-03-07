@@ -19,6 +19,7 @@ const Gallery = ({ children, slidesIndexLength, activeSlideIndex, setActiveSlide
   };
 
   const handleSlideSwipeStart = evt => {
+    evt.preventDefault();
     if (slidesIndexLength > 0) {
       setIsSwiping(true);
       setFirstPosition(evt.nativeEvent.pageX);
@@ -32,12 +33,14 @@ const Gallery = ({ children, slidesIndexLength, activeSlideIndex, setActiveSlide
   };
 
   const handleSlideSwipeMove = evt => {
+    evt.preventDefault();
     if (slidesIndexLength > 0 && isSwiping) {
       setLastPosition(evt.nativeEvent.pageX);
     }
   };
 
-  const handleSlideTouchEnd = (evt) => {
+  const handleSlideSwipeEnd = (evt) => {
+    evt.preventDefault();
     if (lastPosition > 0) {
       if (positionDelta >= 40) {
         const newIndex = activeSlideIndex === 0 ? slidesIndexLength : activeSlideIndex - 1;
@@ -104,17 +107,17 @@ const Gallery = ({ children, slidesIndexLength, activeSlideIndex, setActiveSlide
 
   return (
     <Container style={containerShiftStyles()}>
-      <Slides shift={slidesShift} canTransition={canTransition} isSwiping={isSwiping}>
+      <Slides shift={slidesShift} canTransition={canTransition}>
         {React.Children.map(children, (child, index) => {
           return (
             <Slide
               key={index}
               onTouchStart={handleSlideTouchStart}
               onTouchMove={handleSlideTouchMove}
-              onTouchEnd={handleSlideTouchEnd}
+              onTouchEnd={handleSlideSwipeEnd}
               onMouseDown={handleSlideSwipeStart}
               onMouseMove={handleSlideSwipeMove}
-              onMouseUp={handleSlideTouchEnd}
+              onMouseUp={handleSlideSwipeEnd}
               positionDelta={positionDelta}
             >
               {child}
