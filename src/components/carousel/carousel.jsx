@@ -3,14 +3,12 @@ import propTypes from 'prop-types';
 import SnapperButton from '../snapper-button/snapper-button';
 import CarouselNav from '../carousel-nav/carousel-nav';
 import Gallery from '../gallery/gallery';
-import { Img } from './styled';
 
-const Carousel = ({ slides, slidesLength }) => {
+const Carousel = ({ slidesLength, children }) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const slidesIndexLength = slides.length === 0 ? 0 : slides.length - 1;
+  const slidesIndexLength = slidesLength === 0 ? 0 : slidesLength - 1;
 
   const handleBtnClick = (newSlideIndex) => setActiveSlideIndex(newSlideIndex);
-  const orderedSlides = [slides[slides.length - 1], ...slides, slides[0]];
 
   return (
     <Fragment>
@@ -26,16 +24,7 @@ const Carousel = ({ slides, slidesLength }) => {
         activeSlideIndex={activeSlideIndex}
         setActiveSlideIndex={setActiveSlideIndex}
       >
-        {orderedSlides.map((slideData) => {
-          switch (slideData.type) {
-            case 'image':
-              const { alt, src, id } = slideData;
-              return <Img src={src} alt={alt} key={id} />
-
-            default:
-              console.log('Sorry, we dont support this kind of type');
-          }
-        })}
+        {children}
       </Gallery>
 
       <SnapperButton
@@ -48,18 +37,18 @@ const Carousel = ({ slides, slidesLength }) => {
       <CarouselNav
         activeSlideIndex={activeSlideIndex}
         handleBtnClick={handleBtnClick}
-        slidesLength={slides.length}
+        slidesLength={slidesLength}
       />
     </Fragment>
   );
 };
 
 Carousel.defaultProps = {
-  slides: [],
+  slidesLength: 0,
 };
 
 Carousel.propTypes = {
-  slides: propTypes.array.isRequired,
+  slidesLength: propTypes.number.isRequired,
 };
 
 export default Carousel;
