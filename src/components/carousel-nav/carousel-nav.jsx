@@ -3,8 +3,8 @@ import propTypes from 'prop-types';
 
 import { CarouselControl, CarouselControlBtn } from './styled';
 
-const CarouselNav = ({ activeSlideIndex, imagesLength, handleBtnClick }) => {
-  const indexes = [...Array(imagesLength).keys()];
+const CarouselNav = ({ activeSlideIndex, slidesLength, handleBtnClick }) => {
+  const indexes = [...Array(slidesLength).keys()];
 
   return (
     <CarouselControl>
@@ -24,7 +24,7 @@ const CarouselNav = ({ activeSlideIndex, imagesLength, handleBtnClick }) => {
 }
 
 CarouselNav.propTypes = {
-  imagesLength: propTypes.number.isRequired,
+  slidesLength: propTypes.number.isRequired,
   activeSlideIndex: propTypes.number.isRequired,
   handleBtnClick: propTypes.func.isRequired,
 }

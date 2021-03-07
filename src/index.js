@@ -4,6 +4,6 @@ import App from './components/app/app';
 import slides from './mocks/slides';
 
 ReactDOM.render(
-  <App images={slides}/>,
+  <App slides={slides}/>,
   document.getElementById('carousel')
 );

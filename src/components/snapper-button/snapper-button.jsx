@@ -2,14 +2,14 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { CarouselPrev, CarouselNext, CarouselSnapper } from './styled';
 
-const SnapperButton = ({ activeSlideIndex, imagesIndexLength, isPrev, handleBtnClick }) => {
+const SnapperButton = ({ activeSlideIndex, slidesIndexLength, isPrev, handleBtnClick }) => {
   const goPrevImageIndex = () => {
-    const newIndex = activeSlideIndex === 0 ? imagesIndexLength : activeSlideIndex - 1;
+    const newIndex = activeSlideIndex === 0 ? slidesIndexLength : activeSlideIndex - 1;
     handleBtnClick(newIndex);
   };
 
   const goNextImageIndex = () => {
-    const newIndex = activeSlideIndex === imagesIndexLength ? 0 : activeSlideIndex + 1;
+    const newIndex = activeSlideIndex === slidesIndexLength ? 0 : activeSlideIndex + 1;
     handleBtnClick(newIndex);
   }
 
@@ -23,7 +23,7 @@ const SnapperButton = ({ activeSlideIndex, imagesIndexLength, isPrev, handleBtnC
 SnapperButton.propTypes = {
   isPrev: propTypes.bool.isRequired,
   activeSlideIndex: propTypes.number.isRequired,
-  imagesIndexLength: propTypes.number.isRequired,
+  slidesIndexLength: propTypes.number.isRequired,
   handleBtnClick: propTypes.func.isRequired,
 }
 

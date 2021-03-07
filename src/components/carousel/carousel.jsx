@@ -5,54 +5,61 @@ import CarouselNav from '../carousel-nav/carousel-nav';
 import Gallery from '../gallery/gallery';
 import { Img } from './styled';
 
-const SliderWrapper = ({ images }) => {
+const Carousel = ({ slides, slidesLength }) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const imagesIndexLength = images.length === 0 ? 0 : images.length - 1;
+  const slidesIndexLength = slides.length === 0 ? 0 : slides.length - 1;
 
   const handleBtnClick = (newSlideIndex) => setActiveSlideIndex(newSlideIndex);
-  const orderedImages = [images[images.length - 1], ...images, images[0]];
+  const orderedSlides = [slides[slides.length - 1], ...slides, slides[0]];
 
   return (
     <Fragment>
       <SnapperButton
         isPrev
         activeSlideIndex={activeSlideIndex}
-        imagesIndexLength={imagesIndexLength}
+        slidesIndexLength={slidesIndexLength}
         handleBtnClick={handleBtnClick}
       />
 
       <Gallery
-        imagesIndexLength={imagesIndexLength}
+        slidesIndexLength={slidesIndexLength}
         activeSlideIndex={activeSlideIndex}
         setActiveSlideIndex={setActiveSlideIndex}
       >
-        {orderedImages.map(({ alt, id, src }) => (
-          <Img src={src} alt={alt} key={id} />
-        ))}
+        {orderedSlides.map((slideData) => {
+          switch (slideData.type) {
+            case 'image':
+              const { alt, src, id } = slideData;
+              return <Img src={src} alt={alt} key={id} />
+
+            default:
+              console.log('Sorry, we dont support this kind of type');
+          }
+        })}
       </Gallery>
 
       <SnapperButton
         isPrev={false}
         activeSlideIndex={activeSlideIndex}
-        imagesIndexLength={imagesIndexLength}
+        slidesIndexLength={slidesIndexLength}
         handleBtnClick={handleBtnClick}
       />
 
       <CarouselNav
         activeSlideIndex={activeSlideIndex}
         handleBtnClick={handleBtnClick}
-        imagesLength={images.length}
+        slidesLength={slides.length}
       />
     </Fragment>
   );
 };
 
-SliderWrapper.defaultProps = {
-  images: [],
+Carousel.defaultProps = {
+  slides: [],
 };
 
-SliderWrapper.propTypes = {
-  images: propTypes.array.isRequired,
+Carousel.propTypes = {
+  slides: propTypes.array.isRequired,
 };
 
-export default SliderWrapper;
+export default Carousel;

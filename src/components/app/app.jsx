@@ -1,10 +1,10 @@
 import React from 'react';
-import SliderWrapper from '../slider-wrapper/slider-wrapper';
+import Carousel from '../carousel/carousel';
 
 
-const App = ({images}) => {
+const App = ({slides}) => {
   return (
-    <SliderWrapper images={images} />
+    <Carousel slides={slides} />
   );
 }
 

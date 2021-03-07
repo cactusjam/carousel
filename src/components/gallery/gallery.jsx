@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import { Container, Slides, Slide } from './styled';
 
-const Gallery = ({ children, imagesIndexLength, activeSlideIndex, setActiveSlideIndex }) => {
+const Gallery = ({ children, slidesIndexLength, activeSlideIndex, setActiveSlideIndex }) => {
   const [currentIndex, setCurrentIndex] = useState(activeSlideIndex);
   const [canTransition, setCanTransition] = useState(true);
   const [firstPosition, setFirstPosition] = useState(0);
@@ -12,13 +12,13 @@ const Gallery = ({ children, imagesIndexLength, activeSlideIndex, setActiveSlide
   const positionDelta = lastPosition - firstPosition;
 
   const handleSlideTouchStart = evt => {
-    if (imagesIndexLength > 0) {
+    if (slidesIndexLength > 0) {
       setFirstPosition(evt.nativeEvent.touches[0].pageX);
     }
   };
 
   const handleSlideTouchMove = evt => {
-    if (imagesIndexLength > 0) {
+    if (slidesIndexLength > 0) {
       setLastPosition(evt.nativeEvent.touches[0].pageX);
     }
   };
@@ -26,12 +26,12 @@ const Gallery = ({ children, imagesIndexLength, activeSlideIndex, setActiveSlide
   const handleSlideTouchEnd = () => {
     if (lastPosition > 0) {
       if (positionDelta >= 40) {
-        const newIndex = activeSlideIndex === 0 ? imagesIndexLength : activeSlideIndex - 1;
+        const newIndex = activeSlideIndex === 0 ? slidesIndexLength : activeSlideIndex - 1;
         setActiveSlideIndex(newIndex)
       }
 
       if (positionDelta <= -40) {
-        const newIndex = activeSlideIndex < imagesIndexLength ? activeSlideIndex + 1 : 0;
+        const newIndex = activeSlideIndex < slidesIndexLength ? activeSlideIndex + 1 : 0;
         setActiveSlideIndex(newIndex)
       }
     }
@@ -43,20 +43,20 @@ const Gallery = ({ children, imagesIndexLength, activeSlideIndex, setActiveSlide
   useEffect(() => {
     setCanTransition(true);
 
-    if (currentIndex === imagesIndexLength && activeSlideIndex === 0) {
-      setCurrentIndex(imagesIndexLength + 1);
+    if (currentIndex === slidesIndexLength && activeSlideIndex === 0) {
+      setCurrentIndex(slidesIndexLength + 1);
 
       setTimeout(() => {
         setCanTransition(false);
         setCurrentIndex(0);
       }, 500);
 
-    } else if (currentIndex === 0 && activeSlideIndex === imagesIndexLength) {
+    } else if (currentIndex === 0 && activeSlideIndex === slidesIndexLength) {
       setCurrentIndex(-1);
 
       setTimeout(() => {
         setCanTransition(false);
-        setCurrentIndex(imagesIndexLength);
+        setCurrentIndex(slidesIndexLength);
       }, 500);
 
     } else {
@@ -66,7 +66,7 @@ const Gallery = ({ children, imagesIndexLength, activeSlideIndex, setActiveSlide
   }, [activeSlideIndex]);
 
   const containerShiftStyles = () => {
-    const containerShift = lastPosition != 0 && imagesIndexLength > 0
+    const containerShift = lastPosition != 0 && slidesIndexLength > 0
       ? Math.round(positionDelta)
       : 0;
 
@@ -106,13 +106,13 @@ const Gallery = ({ children, imagesIndexLength, activeSlideIndex, setActiveSlide
 }
 
 Gallery.defaultProps = {
-  imagesIndexLength: 0,
+  slidesIndexLength: 0,
   activeSlideIndex: 0,
 }
 
 Gallery.propTypes = {
   children: propTypes.arrayOf(propTypes.node).isRequired,
-  imagesIndexLength: propTypes.number.isRequired,
+  slidesIndexLength: propTypes.number.isRequired,
   activeSlideIndex: propTypes.number.isRequired,
 }
 
