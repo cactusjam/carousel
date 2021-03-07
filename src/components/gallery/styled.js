@@ -14,6 +14,9 @@ export const Slides = styled.ul`
   margin: 0;
   height: 100%;
 
+  // scroll-snap-type: none;
+  // overflow-x: ${props => props.isSwiping ? 'scroll' : 'initial'};
+
   transform: translateX(${props => props.shift}%);
   transition: ${props => props.canTransition ? 'transform 0.5s cubic-bezier(0.70,1,1,1)' : 'unset'};
 `;

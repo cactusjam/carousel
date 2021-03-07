@@ -6,6 +6,7 @@ import { Container, Slides, Slide } from './styled';
 const Gallery = ({ children, slidesIndexLength, activeSlideIndex, setActiveSlideIndex }) => {
   const [currentIndex, setCurrentIndex] = useState(activeSlideIndex);
   const [canTransition, setCanTransition] = useState(true);
+  const [isSwiping, setIsSwiping] = useState(false);
   const [firstPosition, setFirstPosition] = useState(0);
   const [lastPosition, setLastPosition] = useState(0);
 
@@ -17,13 +18,26 @@ const Gallery = ({ children, slidesIndexLength, activeSlideIndex, setActiveSlide
     }
   };
 
+  const handleSlideSwipeStart = evt => {
+    if (slidesIndexLength > 0) {
+      setIsSwiping(true);
+      setFirstPosition(evt.nativeEvent.pageX);
+    }
+  };
+
   const handleSlideTouchMove = evt => {
     if (slidesIndexLength > 0) {
       setLastPosition(evt.nativeEvent.touches[0].pageX);
     }
   };
 
-  const handleSlideTouchEnd = () => {
+  const handleSlideSwipeMove = evt => {
+    if (slidesIndexLength > 0 && isSwiping) {
+      setLastPosition(evt.nativeEvent.pageX);
+    }
+  };
+
+  const handleSlideTouchEnd = (evt) => {
     if (lastPosition > 0) {
       if (positionDelta >= 40) {
         const newIndex = activeSlideIndex === 0 ? slidesIndexLength : activeSlideIndex - 1;
@@ -34,6 +48,10 @@ const Gallery = ({ children, slidesIndexLength, activeSlideIndex, setActiveSlide
         const newIndex = activeSlideIndex < slidesIndexLength ? activeSlideIndex + 1 : 0;
         setActiveSlideIndex(newIndex)
       }
+    }
+
+    if (evt.type === 'mouseup') {
+      setIsSwiping(false);
     }
 
     setFirstPosition(0);
@@ -86,7 +104,7 @@ const Gallery = ({ children, slidesIndexLength, activeSlideIndex, setActiveSlide
 
   return (
     <Container style={containerShiftStyles()}>
-      <Slides shift={slidesShift} canTransition={canTransition}>
+      <Slides shift={slidesShift} canTransition={canTransition} isSwiping={isSwiping}>
         {React.Children.map(children, (child, index) => {
           return (
             <Slide
@@ -94,6 +112,9 @@ const Gallery = ({ children, slidesIndexLength, activeSlideIndex, setActiveSlide
               onTouchStart={handleSlideTouchStart}
               onTouchMove={handleSlideTouchMove}
               onTouchEnd={handleSlideTouchEnd}
+              onMouseDown={handleSlideSwipeStart}
+              onMouseMove={handleSlideSwipeMove}
+              onMouseUp={handleSlideTouchEnd}
               positionDelta={positionDelta}
             >
               {child}
