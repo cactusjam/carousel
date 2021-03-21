@@ -38,9 +38,8 @@ src\mocks\slides.js
 ```
 based on this example
 ```bash
-{
+ {
     id: 1,
-    alt: `landmark photography of trees near rocky mountain under blue skies daytime`,
-    src: `/img/1.jpg`,
+    content: '<img src="/img/1.jpg" alt="person walks towards trees and mountains" style="width:100%;height:100%"/>',
   }
 ```  
