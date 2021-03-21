@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-export const Img = styled.img`
+export const SlideContainer = styled.div`
   width: 100%;
-  object-fit: cover;
+  background-color: black;
+  display: flex;
 
   @media (min-width: 320px) {
     height: 206px;
